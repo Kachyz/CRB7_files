@@ -4,8 +4,6 @@
 //   * Decir su nombre
 //   * Calcular su IMC
 //      IMC = Peso (kg) / altura (m)2
-      peso / (altura * altura)
-      peso / Math.pow(altura, 2)
 //   * Mencionar si es o no mayor de edad
 //   * Cumplir años
 class Persona{
@@ -14,8 +12,8 @@ class Persona{
     this.edad = edad
   }
 
-  decirNombre(){
-    console.log(`Hola me llamo ${this.nombre}`);
+  decirNombre(saludo){
+    console.log(`${saludo}, me llamo ${this.nombre}`);
   }
 
   esMayor(){
@@ -28,13 +26,22 @@ class Persona{
   esMenor(){
     return this.edad < 18
   }
+
+  cumplirAnios(){
+    console.log("Feliz cumpleanios!!");
+    this.edad = this.edad + 1
+  }
 }
 
-let kachyz = new Persona('Carlos', 30)
-kachyz.decirNombre()
+let kachyz = new Persona('Carlos', 17)
+// kachyz.decirNombre('Hola')
+// kachyz.decirNombre('Que onda')
+// kachyz.decirNombre("What's up")
+kachyz.esMayor()
+kachyz.cumplirAnios()
 kachyz.esMayor()
 
-console.log(`Kachyz es ${kachyz.esMenor() ? 'menor' : 'MAYOR'}`)
+// console.log(`Kachyz es ${kachyz.esMenor() ? 'menor' : 'MAYOR'}`)
 
 
 
