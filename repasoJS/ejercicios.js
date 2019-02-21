@@ -8,13 +8,18 @@ const gradosCaF = (gradosC) => {
 }
 
 // const gradosCaF = gradosC => (gradosC * 9/5) + 32
-
 console.log(gradosCaF(20))
 console.log(gradosCaF(-15))
 
 
-
 // 2) Una funcion que imprima la tabla de multiplicar de X numero
+const tablaMultiplicar = (numero) => {
+  for(let contador = 0; contador <= 10; contador++){
+    console.log(`${numero} * ${contador} = ${numero * contador}`)
+  }
+}
+tablaMultiplicar(4)
+
 
 // 3) Funcion que imprima los primeros 20 numeros pares 
 
