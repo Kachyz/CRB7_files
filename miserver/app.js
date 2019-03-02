@@ -2,10 +2,18 @@ const express = require('express') // express es el modulo
 let app = express() // app es el servidor 
 const bodyParser = require('body-parser')
 const rutaPersona = require('./Routes/personas')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost/videojuegos')
 
 app.use(bodyParser.json())
-app.use('/individuo', rutaPersona)
+app.use('/juegos', rutaPersona)
 
+mongoose.connection.once('open', () => {
+  console.log('Si me pude conectar a la BD')
+}).on('error', () => {
+  console.log('ERROR DE CONEXION')
+})
 
 // app.<metodo>(<ruta>, <cb>)
 app.get('/', (request, response) => {

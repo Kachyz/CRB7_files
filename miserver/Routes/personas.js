@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const bodyParser = require('body-parser')
+const JuegoModel = require('../models/juegoModel')
 
 router.use(bodyParser.json())
 
@@ -13,8 +14,15 @@ let misPersonas = [{
 }]
 
 router.get('/', (req, res) => {
-  console.log('Estoy en PERSONA');
-  res.send(misPersonas)
+  console.log('Estoy en GET PERSONA');
+  JuegoModel.find((err, juego) => {
+    if(err){
+      console.log("Hubo un error en el GET de JUEGO");
+      res.send(404)
+    }
+    res.send(juego)
+  })
+  // res.send(misPersonas)
 })
 
 router.post('/', (req, res) => {
