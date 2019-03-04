@@ -34,6 +34,6 @@ app.get('/body', (req, res) => {
   res.send(200)
 })
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('Estoy corriendo en el puerto 5000');
 })

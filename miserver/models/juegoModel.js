@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const JuegoSchema = new Schema({
-  titulo: String,
+  titulo: {type: String, required: true}, //Campo obligatorio
   anio: Number,
   compania: String,
   plataforma: Array

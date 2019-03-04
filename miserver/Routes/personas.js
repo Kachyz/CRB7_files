@@ -27,26 +27,41 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log(req.body)
-  misPersonas.push(req.body)
-  res.send(202)
+
+  let nuevoJuego = new JuegoModel(req.body)
+  nuevoJuego.save()
+    .then( () => {
+      console.log('Juego Guardado')
+    })
+    .catch( (error) => {
+      console.log('No pude guardar el juego', error);
+    })
+
+  // misPersonas.push(req.body)
+  res.status(202).send('Juego recibido')
 })
 
-router.delete('/:posicion', (req, res) => {
-  let posicionInicial = req.params.posicion
-  // misPersonas.splice(<Que posicion>, <Cuanto va a borrar = 1/>)
-  console.log(misPersonas);
-  misPersonas.splice(posicionInicial, 1)
-  console.log(misPersonas);
-  res.send("Elemento borrado")
+router.delete('/', (req, res) => {
+  let tituloRecibido = req.query.titulo
+
+  // JuegoModel.findOneAndRemove(<query>, <CB>)
+  JuegoModel.findOneAndRemove({titulo: tituloRecibido}, (error, data) => {
+    console.log(data);
+    if (error)
+      console.log(`Error al borrar ${error}`);
+    else
+      res.status(201).send('Elemento borrado'+ data)
+  })
 })
 
-router.put('/:posicion', (req, res) => {
-  let posicionInicial = req.params.posicion
-  // misPersonas.splice(<Que posicion>, <Cuanto va a borrar = 1/>)
-  console.log(misPersonas);
-  misPersonas[posicionInicial] = req.body
-  console.log(misPersonas);
-  res.send("Elemento actualizado")
+router.put('/', (req, res) => {
+  let tituloModificar = req.query.titulo
+  JuegoModel.findOneAndUpdate({titulo: tituloModificar}, req.body, (error, data) => {
+    if (error)
+      console.log(`ERROR - ${error}`)
+    else
+      res.status(201).send('Juego actualizado' + data)
+  })
 })
 
 // Params
